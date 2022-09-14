@@ -32,7 +32,7 @@ app.get("/api/:date", function(req, res){
   date = Date.now()
   }
 
-let utc = new Date(parseInt(date)).toString();
+let utc = date.indexOf('-') === (-1) ? new Date(parseInt(date)).toString() : new Date(date).toString();
 console.log(utc);
 if(!utc) {
   data = {
@@ -40,9 +40,11 @@ if(!utc) {
   }
   res.json(data);
 }
-  
+
+console.log(date)
 let unix = date.indexOf('-') === (-1) ? date : (new Date(date)).getTime();
   console.log(unix);
+  console.log(utc);
 
 data = { utc, unix  };
   res.json(data);
